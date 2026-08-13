@@ -53,27 +53,42 @@ def test_given_example():
 
 
 # ---------------------------------------------------------------------
-# TODO Test Case 1
-# Which mind-map category does this represent? (edit this comment)
+# Test Case 1
+# Category: Constraint checking (valid assignment)
+# Checks that a non-conflicting assignment is considered consistent.
 # ---------------------------------------------------------------------
 def test_case_1():
-    raise NotImplementedError("TODO: design and implement test case 1")
+    assignment = {
+        "WA": "Red"
+    }
+
+    assert is_consistent(assignment, "NT", "Green")
 
 
 # ---------------------------------------------------------------------
-# TODO Test Case 2
-# Which mind-map category does this represent? (edit this comment)
+# Test Case 2
+# Category: Constraint checking (conflicting assignment)
+# Checks that neighbouring regions cannot have the same colour.
 # ---------------------------------------------------------------------
 def test_case_2():
-    raise NotImplementedError("TODO: design and implement test case 2")
+    assignment = {
+        "WA": "Red"
+    }
+
+    assert not is_consistent(assignment, "NT", "Red")
 
 
 # ---------------------------------------------------------------------
 # TODO Test Case 3
-# Which mind-map category does this represent? (edit this comment)
+# Category: Unsolvable / over-constrained case
+# Only one colour is available, so no valid solution should exist.
 # ---------------------------------------------------------------------
 def test_case_3():
-    raise NotImplementedError("TODO: design and implement test case 3")
+    from csp_map_coloring import VARIABLES
+
+    solution = backtracking_search(VARIABLES, ["Red"])
+
+    assert solution is None
 
 
 if __name__ == "__main__":
