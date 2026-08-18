@@ -45,26 +45,65 @@ def test_given_example():
 
 # ---------------------------------------------------------------------
 # TODO Test Case 1
-# Which mind-map category does this represent? (edit this comment)
+# Category: Typical case (normal case with obstacles).
+# This checks that A* can find the shortest path around walls.
 # ---------------------------------------------------------------------
 def test_case_1():
-    raise NotImplementedError("TODO: design and implement test case 1")
+    grid = [
+        "S#.",
+        ".#.",
+        "..G",
+    ]
+
+    start = find_cell(grid, "S")
+    goal = find_cell(grid, "G")
+
+    path, cost = astar(grid, start, goal)
+
+    assert path is not None
+    assert path[0] == start
+    assert path[-1] == goal
+    assert cost == 4
 
 
 # ---------------------------------------------------------------------
 # TODO Test Case 2
-# Which mind-map category does this represent? (edit this comment)
+# Category: Boundary/edge case.
+# Start and goal are adjacent, so the shortest path is one move.
 # ---------------------------------------------------------------------
 def test_case_2():
-    raise NotImplementedError("TODO: design and implement test case 2")
+    grid = [
+        "SG",
+    ]
+
+    start = find_cell(grid, "S")
+    goal = find_cell(grid, "G")
+
+    path, cost = astar(grid, start, goal)
+
+    assert path == [start, goal]
+    assert cost == 1
 
 
 # ---------------------------------------------------------------------
 # TODO Test Case 3
-# Which mind-map category does this represent? (edit this comment)
+# Category: Unsolvable case.
+# The goal is completely blocked by walls, so no path should exist.
 # ---------------------------------------------------------------------
 def test_case_3():
-    raise NotImplementedError("TODO: design and implement test case 3")
+    grid = [
+        "S#G",
+        "###",
+        "...",
+    ]
+
+    start = find_cell(grid, "S")
+    goal = find_cell(grid, "G")
+
+    path, cost = astar(grid, start, goal)
+
+    assert path is None
+    assert cost == float("inf")
 
 
 if __name__ == "__main__":
